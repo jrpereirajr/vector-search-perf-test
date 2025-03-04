@@ -26,6 +26,10 @@ ENV PATH "/usr/irissys/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sb
 
 COPY .iris_init /home/irisowner/.iris_init
 
+# todo: passar para o requirements.txt
+RUN pip install -q torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install -q sentence-transformers
+
 RUN --mount=type=bind,src=.,dst=. \
     pip3 install -r requirements.txt && \
     iris start IRIS && \

@@ -3,3 +3,8 @@ iris-main.log
 .env
 .git
 
+tmp
+.ipynb_checkpoints
+prometheus
+prometheus-data
+grafana

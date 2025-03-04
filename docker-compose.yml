@@ -8,8 +8,53 @@ services:
     restart: always
     command: --check-caps false --ISCAgent false
     ports:
-      - 1972
-      - 52773
-      - 53773
+      - 58318:1972
+      - 58316:52773
+      - 58317:53773
+      - 19999:9999
     volumes:
       - ./:/home/irisowner/dev
+    networks:
+      - default 
+
+  jupyter:
+    image: quay.io/jupyter/base-notebook
+    user: root
+    ports:
+      - 29999:8888
+    volumes:
+      - ./jupyter:/home/jovyan/work
+    environment:
+      - NB_UID=${UID:-1000}
+      - NB_GID=${GID:-1000}
+      - JUPYTER_ENABLE_LAB=yes
+      - OPENAI_API_KEY=$OPENAI_API_KEY
+    command: start-notebook.sh --NotebookApp.token=''
+    networks:
+      - default 
+
+  prometheus:
+    image: prom/prometheus
+    user: root
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+    networks:
+      - default
+
+  grafana:
+    image: grafana/grafana
+    user: root
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana:/var/lib/grafana
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
