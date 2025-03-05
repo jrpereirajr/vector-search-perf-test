@@ -5,6 +5,10 @@ iris-main.log
 
 tmp
 .ipynb_checkpoints
-prometheus
+
+# ignore prometheus data
 prometheus-data
-grafana
+
+# ignore grafana data except its configuration database
+grafana-data/*
+!grafana-data/grafana.db
