@@ -6,6 +6,8 @@
       },
     "objectscript.conn" :{
       "active": true,
+      "host": "localhost",
+      "port": 58316,
       "ns": "IRISAPP",
       "username": "_SYSTEM",
       "password": "SYS",
@@ -14,7 +16,11 @@
         "internalPort": 52773
       },
       "links": {
-        "UnitTest Portal": "${serverUrl}/csp/sys/%25UnitTest.Portal.Home.cls?$NAMESPACE=IRISAPP"
+        "UnitTest Portal": "${serverUrl}/csp/sys/%25UnitTest.Portal.Home.cls?$NAMESPACE=IRISAPP",
+        "Manager Portal": "${serverUrl}/csp/sys/%25CSP.Portal.Home.zen?$NAMESPACE=%25SYS",
+        "Jupyter Notebook": "http://localhost:29999",
+        "Prometheus": "http://localhost:9090",
+        "Grafana": "http://localhost:3000"
       }
     },
     "intersystems.testingManager.client.relativeTestRoot": "tests"
